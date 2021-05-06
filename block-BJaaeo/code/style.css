@@ -96,9 +96,9 @@ button {
   color: #fff;  
   outline: none; 
 }
-/* .calc-screen:hover {
+.calc-screen:hover {
     outline: none;
-} */
+}
 
 .btn-container {
     border: 2px solid black;
