@@ -1,0 +1,14 @@
+.container{
+    width: 500px;
+    margin: 0 auto;
+    background-color: skyblue;
+    padding: 50px;
+}
+.name{
+    width: 100%;
+    padding: 20px;
+    color: black;
+    margin-bottom: 20px;
+    outline: none;
+    border: none;
+}
