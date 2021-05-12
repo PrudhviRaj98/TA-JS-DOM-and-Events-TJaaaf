@@ -32,43 +32,27 @@ let searchh = document.querySelector("#searching");
                 buttonOne.classList.add("btnName");
                 buttonOne.innerText = elem.name;
                 buttonOne.setAttribute("data-id" , index);
-                buttonOne.addEventListener('click', byClicking);
+                
+                buttonOne.addEventListener('click', ()=>{
+                    let peopleOfTheHouse = got.houses.find((house)=> house.name === elem.name).people
+                    console.log(peopleOfTheHouse);
+                    createUI(peopleOfTheHouse);
+                });
                 secondRoot.append(buttonOne );
             });
         
-// ...................................................arr........
-            let arr = [
+        
                 
-            ];
-//  ..................arr.concat.apply.apply.apply.apply.apply.apply.apply.apply.apply.apply.apply.apply.....           
-                
-            function byClicking(event){
-               let one = event.target.innerText;
-              got.houses.filter((elm)=>{
-                  if(one == elm.name){
-                    elm.people.filter((ela)=>{
-                        console.log(ela);
-                        var obj = {
-                            image:ela.image,
-                            name:ela.name,
-                            des:ela.description,
-                        }
-                        arr.push(obj);
-                        createUI();
-                      });
-                  }  
-              });
-                
-            }
+            
 
 
 // .......................................console...............console.log...
 
 
-            function createUI(){
+            function createUI(data = []){
                 root.innerHTML = "";
 
-                arr.forEach((partCards)=>{
+                data.forEach((partCards)=>{
                     let newDiv = document.createElement("div");
                     newDiv.classList.add("newDiv");
                     let imageTwo = document.createElement("img");
@@ -89,30 +73,20 @@ let searchh = document.querySelector("#searching");
             }
         
 ///////////////////////////////////////////////////////
-
+let allPeople = got.houses.reduce((acc,cv)=>{
+    acc = acc.concat(cv.people);
+    console.log(acc);
+    return acc;
+}, []);
 
 function searching(event){
     let value = event.target.value;
-
-    got.houses.forEach((ele)=>{
-        console.log(ele);
-        ele.people.forEach((elem)=>{
-            let nameG = elem.name;
-            if(value == nameG ){
-                
-                let objj = {
-                    name:elem.nam,
-                    image:elem.image,
-                    des:elem.description
-                }
-                arr.push(objj);1
-                createUI();
-            }
-        });
-    });
+    let filteredPeople = allPeople.filter((p)=> p.name.toLowerCase().includes(value.toLowerCase() ));
+    createUI(filteredPeople);
+    
     
 }
-searchh.addEventListener('keyup' , searching);
+searchh.addEventListener('input' , searching);
 
 
        
