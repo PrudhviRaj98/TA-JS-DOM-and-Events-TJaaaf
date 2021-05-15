@@ -1,82 +1,83 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/* ........................................... */
-
 .container{
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
+    width: 45%;
+    /* border: 1px solid grey; */
+    margin: auto;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
-.firstDiv{
-    padding: 50px;
-    border: 2px solid red;
-    height: 500px;
-    background-color: skyblue;
-
+h1{
+    height: 4.5rem;
+    text-align: center;
+    font-size: 6rem;
+    color: rgba(255, 99, 71, 0.274);
 }
-.todo{
-    margin-bottom: 50px;
+.input{
     width: 100%;
-    padding: 10px;
-    font-size: 20px;
-    color: orangered;
-    outline: none;
+    padding: 1.8rem 0.4rem;
+    font-size: 1.3rem;
     border: none;
+    letter-spacing: 2px;
+    padding-left: 1rem;
+    box-shadow: -1px -1px 3px rgba(255,255,255,0.7),
+                1px 1px 3px rgba(0,0,0,0.4);
 }
-span{
-    margin-left: 20px;
-    color: blueviolet;
-    font-size: 20px;
+.input:focus{
+    border: none;
+    outline: none;
 }
-.selected{
-    background-color: white;
-    border: 2px solid black;
-    color: black;
+
+
+.footer{
+    width: 100%;
+    margin-top: 4rem;
+}
+ .footer small{
+     display: block;
+    text-align: center;
+    line-height: 0;
+    font-size: 0.7rem;
+}
+
+li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px dotted grey;
+    position: relative;
+    padding: 0.2rem 0.2rem;
+    cursor: pointer;
+    margin-top: 0.3rem;
+}
+.name{
+    margin-left: 2rem;
+    font-size: 1.5rem;
+}
+.cross{
+    position: absolute;
+    right: 1rem;
+    display: none;
+    animation: cross 0.5s linear;
+}
+@keyframes cross {
+    from{
+        opacity: 0%;
+    }to{
+        opacity: 100%;
+    }
+}
+li:hover .cross{
+    display: block;
+    transform: all 0.5s ease;
+    cursor: pointer;
+}
+.completed{
+    text-align: center;
+}
+button{
+    border: none;
+    background: none;
+    display: inline-block;
+    color: grey;
+    margin-top: 1.5rem;
 }
