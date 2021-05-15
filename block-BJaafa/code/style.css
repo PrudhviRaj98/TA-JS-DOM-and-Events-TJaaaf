@@ -1,0 +1,83 @@
+.container{
+    width: 45%;
+    /* border: 1px solid grey; */
+    margin: auto;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+    height: 4.5rem;
+    text-align: center;
+    font-size: 6rem;
+    color: rgba(255, 99, 71, 0.274);
+}
+.input{
+    width: 100%;
+    padding: 1.8rem 0.4rem;
+    font-size: 1.3rem;
+    border: none;
+    letter-spacing: 2px;
+    padding-left: 1rem;
+    box-shadow: -1px -1px 3px rgba(255,255,255,0.7),
+                1px 1px 3px rgba(0,0,0,0.4);
+}
+.input:focus{
+    border: none;
+    outline: none;
+}
+
+
+.footer{
+    width: 100%;
+    margin-top: 4rem;
+}
+ .footer small{
+     display: block;
+    text-align: center;
+    line-height: 0;
+    font-size: 0.7rem;
+}
+
+li{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 3px dotted grey;
+    position: relative;
+    padding: 0.2rem 0.2rem;
+    cursor: pointer;
+    margin-top: 0.3rem;
+}
+.name{
+    margin-left: 2rem;
+    font-size: 1.5rem;
+}
+.cross{
+    position: absolute;
+    right: 1rem;
+    display: none;
+    animation: cross 0.5s linear;
+}
+@keyframes cross {
+    from{
+        opacity: 0%;
+    }to{
+        opacity: 100%;
+    }
+}
+li:hover .cross{
+    display: block;
+    transform: all 0.5s ease;
+    cursor: pointer;
+}
+.completed{
+    text-align: center;
+}
+button{
+    border: none;
+    background: none;
+    display: inline-block;
+    color: grey;
+    margin-top: 1.5rem;
+}
