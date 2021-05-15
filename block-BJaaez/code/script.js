@@ -1,106 +1,77 @@
-let input = document.querySelector(".todo");
-let root = document.querySelector(".ul");
-let all = document.querySelector(".all");
-let active = document.querySelector(".active");
-let completed = document.querySelector(".completed");
-let clear = document.querySelector(".clear");
-let activeButton = "all";
-let todos = localStorage.getItem("todos")
-    ? JSON.parse(localStorage.getItem("todos"))
-    : [];
+let InputText = document.getElementById('text')
+let root = document.querySelector('.ul')
+let allTodos = JSON.parse(localStorage.getItem('todos')) || [];
 
-function createUI(data = todos){
-    root.innerText = "";
-    data.forEach((todo , index)=>{
-        let li =  document.createElement("li");
-        let input = document.createElement("input");
-        input.type = "checkbox";
-        input.checked = todo.isDone;
-        input.setAttribute("data-id" , index);
-        input.addEventListener("input", toggle);
+
+function handleInputs(event){
+    // event.preventDefault();
+   let value =  event.target.value;
+  if(event.keyCode === 13 && value != ""){
+    let todo = {
+        name : value,
+        isDone : false,
+    }
+    allTodos.push(todo);
+    event.target.value = "";
+    createUi();
+    // console.log(allTodos); 
+  }
+//   console.log(value)
+}
+function toggleInputs(event){
+    let id = event.target.dataset.id;
+    allTodos[id].isDone = !allTodos[id].isDone
+    createUi();
+}
+
+function createUi(){
+    root.innerHTML = "";
+    allTodos.forEach((elem, index) => {
+        let li = document.createElement('li')
+
+        let input = document.createElement('input')
+        input.type = "checkbox"
+        input.classList.add('checkbox')
+        input.innerHTML = elem.isDone;
+        if(input.checked === true){
+            name.style.textDecoration = "line-through"
+        }
+        localStorage.setItem('todos',JSON.stringify(allTodos))
         
-        let label = document.createElement("label");
-        label.innerText = todo.name ;
-        let span = document.createElement("span");
-        span.innerText = "X";
-        span.setAttribute("data-id" , index);
-        span.addEventListener('click' , deleting);
-        li.append(input,label,span);
-        root.append(li);
-    });
-    
+        input.setAttribute("data-id", index)
+        input.addEventListener('input', toggleInputs)
+
+
+        let name = document.createElement('p')
+        name.innerHTML = elem.name
+        name.classList.add("name")
+
+
+        let cross = document.createElement('span')
+        cross.innerHTML = '❌';
+        cross.classList.add('cross')
+        cross.setAttribute("data-id", index)
+        cross.addEventListener('click', (event) => {
+            let id = event.target.dataset.id;
+            allTodos.splice(id,1);
+            createUi();
+            console.log(id);
+            localStorage.setItem("todos",JSON.stringify(allTodos))
+        } )
+
+        li.append(input,name,cross)
+        root.append(li)  
+    })
 }
 
-function toggle(event){
-    let id = event.target.dataset.id;
-    todo[id].isDone = !todo[id].isDone;
-    createUI();
-    localStorage.setItem('todos',JSON.stringify(todos));
-}
-function deleting(event){
-    let id = event.target.dataset.id;
-    todos.splice(id , 1);
-    
-    createUI();
+InputText.addEventListener("keyup", handleInputs)
 
-    localStorage.setItem('todos',JSON.stringify(todos));
-}
+let complete = document.getElementById("completed")
+complete.addEventListener('click', () => {
+    root.style.display = "none"
+})
 
-function handleInput(event){
-    let value = event.target.value;
-    console.log(value);
-    if(event.keyCode === 13 && value !== ""){
-        let todo ={
-            name:value,
-            isDone:false,
-        };
-        todos.push(todo);
-        event.target.value = "";
-        createUI();
-        localStorage.setItem('todos',JSON.stringify(todos));
-    }
-    
-}
-createUI();
-
-clear.addEventListener('click',()=>{
-   todos = todos.filter(todo => !todo.isDone);
-   createUI();
-   localStorage.setItem('todos',JSON.stringify(todos));
-});
-
-active.addEventListener('click',()=>{
-    let notCompleted = todos.filter(todo => !todo.isDone);
-    createUI(notCompleted);
-    activeButton = "active";
-    updateActiveButton();
-});
-
-completed.addEventListener('click',()=>{
-    let completedTodos = todos.filter(todo => todo.isDone);
-    createUI(completedTodos);
-    activeButton = "completed";
-    updateActiveButton();
-});
-
-all.addEventListener('click',()=>{
-    createUI();
-    activeButton = 'all';
-    updateActiveButton();
-});
-
-function updateActiveButton(btn = activeButton){
-    all.classList.remove('selected');
-    active.classList.remove('selected');
-    completed.classList.remove('selected');
-
-    if(btn === 'all'){
-        all.classList.add('selected');
-    }if(btn === 'active'){
-        active.classList.add("selected");
-    }if(btn === 'completed'){
-        completed.classList.add('selected');
-    }
-}
-updateActiveButton();
-input.addEventListener('keyup' ,handleInput);
+let all = document.getElementById('all')
+all.addEventListener('click',()=> {
+    root.style.display = "block"
+})
